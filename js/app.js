@@ -1,46 +1,47 @@
-// Telefone do lojista (Substitua pelo número real)
+// Telefone do lojista (Certifique-se de usar o código do país + DDD)
 const WHATSAPP_NUMBER = "5535992225475"; 
 
-// Mock do Banco de Dados de Produtos
+// Mock do Banco de Dados de Produtos com caminhos locais
 const products = [
     {
         id: 1,
-        name: "Queijo Minas Artesanal Maturado",
-        description: "Maturado em prateleiras de madeira na altitude da serra. Casca amarelada e interior macio.",
-        price: 85.00,
-        image: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&q=80&w=500" // Placeholder
+        name: "Queijo Minas Artesanal",
+        description: "Tradicional queijo da Mantiqueira, com maturação artesanal e sabor que remete às fazendas históricas da nossa serra.",
+        price: 65.00,
+        image: "assets/produtos/queijo.png" 
     },
     {
         id: 2,
         name: "Mel Silvestre Florada Nativa",
-        description: "Colhido em áreas de preservação. Sabor intenso e propriedades terapêuticas únicas.",
-        price: 45.00,
-        image: "https://images.unsplash.com/photo-1587049352847-4d4b1a457a40?auto=format&fit=crop&q=80&w=500"
+        description: "Puro e silvestre, colhido diretamente das matas preservadas da região, trazendo notas florais únicas.",
+        price: 55.00,
+        image: "assets/produtos/mel.png" 
     },
     {
         id: 3,
-        name: "Doce de Leite na Panela de Cobre",
-        description: "Receita de família centenária, cremoso, sem conservantes e feito lentamente ao fogo.",
-        price: 38.00,
-        image: "https://images.unsplash.com/photo-1512223792601-592a9809eed4?auto=format&fit=crop&q=80&w=500"
+        name: "Champignon de Paris",
+        description: "Cogumelos selecionados, cultivados nas encostas úmidas da Mantiqueira. Frescor e textura para a alta gastronomia.",
+        price: 40.00,
+        image: "assets/produtos/champignon.png"
     }
 ];
 
-// Função para formatar moeda
+// Função para formatar moeda (Real Brasileiro)
 const formatCurrency = (value) => {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 };
 
-// Função para gerar link do WhatsApp
+// Função para gerar link dinâmico do WhatsApp
 const generateWhatsAppLink = (productName) => {
-    const message = `Olá! Vim pelo catálogo digital. Gostaria de encomendar o produto: *${productName}*. Pode me ajudar?`;
+    const message = `Olá! Gostaria de encomendar o produto: *${productName}*. Pode me ajudar com o pedido?`;
     const encodedMessage = encodeURIComponent(message);
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 };
 
-// Renderizar Produtos no DOM
+// Renderizar Produtos no Catálogo
 const renderProducts = () => {
     const grid = document.getElementById('product-grid');
+    grid.innerHTML = ""; // Limpa o grid antes de renderizar
     
     products.forEach(product => {
         const productCard = document.createElement('div');
@@ -60,7 +61,7 @@ const renderProducts = () => {
     });
 };
 
-// Gerar QR Code Geral
+// Gerar QR Code para contato geral
 const generateGeneralQRCode = () => {
     const defaultMessage = "Olá! Gostaria de conhecer mais os produtos da Orvalho da Serra.";
     const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(defaultMessage)}`;
@@ -69,13 +70,13 @@ const generateGeneralQRCode = () => {
         text: link,
         width: 150,
         height: 150,
-        colorDark : "#6B4226", // Cor da logo
+        colorDark : "#3D5A40", // Verde Pinheiro da Logo
         colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.H
     });
 };
 
-// Inicialização
+// Inicialização ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
     renderProducts();
     generateGeneralQRCode();
