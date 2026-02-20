@@ -5,7 +5,7 @@ const WHATSAPP_NUMBER = "5535992225475";
 const products = [
     {
         id: 1,
-        name: "Queijo Minas Artesanal",
+        name: "Queijo Parmesão Artesanal",
         description: "Tradicional queijo da Mantiqueira, com maturação artesanal e sabor que remete às fazendas históricas da nossa serra.",
         price: 65.00,
         image: "assets/produtos/queijo.png" 
